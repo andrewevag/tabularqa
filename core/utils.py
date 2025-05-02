@@ -46,7 +46,7 @@ def load_sample(name: str) -> pd.DataFrame:
     global CACHE_SAMPLE_NAME
     if CACHE_SAMPLE_NAME != name:
         CACHE_SAMPLE = pd.read_parquet(
-            f"hf://datasets/cardiffnlp/databench/resolve/main/data/{name}/sample.parquet"
+            f"https://huggingface.co/datasets/cardiffnlp/databench/resolve/main/data/{name}/sample.parquet"
         )
         CACHE_SAMPLE_NAME = name
     return CACHE_SAMPLE
@@ -63,15 +63,15 @@ def load_test_data_with_answers(test_data_dir='./competition'):
     questions = [row[1]['question'] for row in test_data.iterrows()]
     datasets  = [row[1]['dataset'] for row in test_data.iterrows()]
 
-    test_data_ground_truth_file = f'{test_data_dir}/answers/answers/answers.txt'
+    test_data_ground_truth_file = f'{test_data_dir}/answers/answers.txt'
     with open(test_data_ground_truth_file, "r") as f:
         ground_truth = f.read().splitlines()
 
-    test_data_semantics_f = f'{test_data_dir}/answers/answers/semantics.txt'
+    test_data_semantics_f = f'{test_data_dir}/answers/semantics.txt'
     with open(test_data_semantics_f, "r") as f:
         test_data_semantics = f.read().splitlines()
 
-    test_data_ground_truth_lite = f'{test_data_dir}/answers/answers/answers_lite.txt'
+    test_data_ground_truth_lite = f'{test_data_dir}/answers/answers_lite.txt'
     with open(test_data_ground_truth_lite, "r") as f:
         ground_truth_lite = f.read().splitlines()
     

@@ -1,0 +1,165 @@
+{
+    "dataset_split": "semeval train[:400]",
+    "exemplars": [
+        {
+            "annotation": "\n# Create a boolean mask for rows where Position is 'ST'\nis_st_position = df['Position<gx:category>'] == 'ST'\n\n# Count the rows where the mask is True\nst_player_count = df[is_st_position].shape[0]\n\n# Return the count of players with 'ST' position\nreturn st_player_count\n",
+            "index": 132
+        },
+        {
+            "annotation": "\n# Count the number of unique values in the 'CustomerID' column\nunique_customers = df['CustomerID'].nunique()\n# Return the count of unique customers\nreturn unique_customers\n",
+            "index": 309
+        },
+        {
+            "annotation": "# Retrieve the 'score' column, sort it in descending order, and get the top 3 scores\ntop_scores = df['score'].nlargest(3).tolist()\n# Return the list of the top 3 scores\nreturn top_scores\n",
+            "index": 341
+        },
+        {
+            "annotation": "# Calculate the number of reviews for each 'Clothing ID' \nnum_reviews = df['Clothing ID'].value_counts()\n# Calculate the Clothing ID with the maximum number of reviews\nmost_frequent_item = num_reviews.idxmax()\n\n# Return the Clothing ID of the most frequently reviewed item\nreturn most_frequent_item\n",
+            "index": 196
+        },
+        {
+            "annotation": "# Check if any value in the 'speed_mph' column is greater than 100, and return True if so\nreturn (df['speed_mph'] > 100).any()\n",
+            "index": 246
+        },
+        {
+            "annotation": "# Step 1: Access the 'What is your hair color?' column from the DataFrame\nhair_color_column = df['What is your hair color? \ud83d\udc69\ud83e\uddb0\ud83d\udc71\ud83c\udffd']\n    \n# Step 2: Use the value_counts() method to count the occurrences of each unique hair color\nhair_color_counts = hair_color_column.value_counts()\n    \n# Step 3: Extract the 4 least common hair colors \nleast_common_hair_colors = hair_color_counts.nsmallest(4)\n    \n# Step 4: Get only the hair color names (not the counts) and return them as a list\nresult = least_common_hair_colors.index.tolist()\n    \n# Return the list of 4 least common hair colors\nreturn result\n",
+            "index": 60
+        },
+        {
+            "annotation": "# Step 1: Find the index of the row with the maximum number of injuries\nmax_injuries_idx = df['inj'].idxmax()\n    \n# Step 2: Use the index to retrieve the corresponding date\nmost_destructive_tornado_date = df.loc[max_injuries_idx, 'date']\n    \n# Step 3: Return the date of the most destructive tornado\nreturn most_destructive_tornado_date\n",
+            "index": 155
+        },
+        {
+            "annotation": "# Pick the top 3 speeds from the 'speed_mph' column\ntop_3_speeds = df['speed_mph'].nlargest(3)\n\n# Return the top 3 speeds as a list\nreturn top_3_speeds.tolist()\n",
+            "index": 261
+        },
+        {
+            "annotation": "# Pick the top 3 values from the 'Overall<gx:number>' column\ntop_3_overall = df['Overall<gx:number>'].nlargest(3)\n\n# Return the top 3 values as a list\nreturn top_3_overall.tolist()\n",
+            "index": 141
+        },
+        {
+            "annotation": "# Count occurencies of each day of the week\ndays_counts = df['Incident Day of Week'].value_counts()\n\n# Return the day with the highest count\nreturn days_counts.idxmax()\n",
+            "index": 214
+        },
+        {
+            "annotation": "# Step 1: Group the DataFrame by 'Pclass' (passenger class) and calculate the mean of 'Survived' for each group\n# This will give the survival rate per class\nsurvival_rate_by_class = df.groupby('Pclass')['Survived'].mean()\n\n# Step 2: Sort the survival rates in descending order, and take the top 3 classes\ntop_3_classes = survival_rate_by_class.nlargest(3)\n\n# Step 3: Return the indices (i.e., the passenger classes) of the top 3 survival rates\n# nlargest(3) will return the classes with the highest survival rates\nreturn top_3_classes.index.tolist()\n",
+            "index": 37
+        },
+        {
+            "annotation": "# Step 1: Use the 'Preferred Foot' column to find the most common value (mode).\n# The mode function will return the most frequent value in this column.\nmost_common_foot = df['Preferred Foot<gx:category>'].mode()[0]\n    \n# Step 2: Return the most common value (the most common preferred foot).\nreturn most_common_foot\n",
+            "index": 134
+        },
+        {
+            "annotation": "# Count the number of listings for each neighbourhood\nneighbourhood_counts = df['neighbourhood_cleansed'].value_counts()\n    \n# Find the neighbourhood with the maximum count (i.e., the one with the most listings)\nmost_listings_neighbourhood = neighbourhood_counts.idxmax()\n    \n# Return the neighbourhood with the most listings\nreturn most_listings_neighbourhood\n",
+            "index": 113
+        },
+        {
+            "annotation": "# Check if there are any employees hired in 2019 by filtering the dataframe\nhired_in_2019 = df[df['Date Hired'].dt.year == 2019]\n    \n# Return True if there are any employees hired in 2019, else return False\nreturn not hired_in_2019.empty\n",
+            "index": 348
+        },
+        {
+            "annotation": "# Find the row with the highest philanthropy score by sorting the dataframe based on 'philanthropyScore' in descending order\ntop_philanthropist = df.loc[df['philanthropyScore'].idxmax()]\n\n# Extract the 'gender' of that person (the row with the highest philanthropy score)\nreturn top_philanthropist['gender']\n",
+            "index": 12
+        },
+        {
+            "annotation": "# Step 1: Count the occurrences of each civil status in the column 'What is your civil status? \ud83d\udc8d'\ncivil_status_counts = df['What is your civil status? \ud83d\udc8d'].value_counts()\n\n# Step 2: Get the top 5 most common civil statuses using nlargest\ntop_5_civil_statuses = civil_status_counts.nlargest(5)\n\n# Step 3: Extract the civil status names (index of the result) as a list\ntop_5_civil_statuses_list = top_5_civil_statuses.index.tolist()\n\n# Step 4: Return the list of the top 5 civil statuses\nreturn top_5_civil_statuses_list\n",
+            "index": 59
+        },
+        {
+            "annotation": "# Step 1: Filter the dataframe to find the row where the food name is 'Kiwi'\nkiwi_row = df[df['FOOD NAME'] == 'Kiwi']\n\n# Step 2: Extract the group from the filtered row\nkiwi_group = kiwi_row['GROUP'].iloc[0]\n\n# Step 3: Return the group of the food 'Kiwi'\nreturn kiwi_group\n",
+            "index": 293
+        },
+        {
+            "annotation": "# Step 1: Group the dataframe by 'Club' and calculate the mean of the 'Potential' column for each group\navg_potential_per_club = df.groupby('Club<gx:category>')['Potential<gx:number>'].mean()\n\n# Step 2: Use nlargest to get the top 6 clubs with the highest average potential\ntop_6_clubs = avg_potential_per_club.nlargest(6).index.tolist()\n\n# Return the list of top 6 clubs\nreturn top_6_clubs\n",
+            "index": 140
+        },
+        {
+            "annotation": "# Filter the DataFrame to include only rows where 'Incident Day of Week' is 'Monday'\nmonday_incidents = df[df['Incident Day of Week'] == 'Monday']\n    \n# Check if all resolutions for Monday incidents are not 'Open or Active'\n# This means the incident is resolved\nreturn monday_incidents['Resolution'].ne('Open or Active').all()\n",
+            "index": 206
+        },
+        {
+            "annotation": "# Count the occurrences of each category in the 'Division Name' column\ncategory_counts = df['Division Name'].value_counts()\n\n# Use nlargest to get the top 2 most frequent categories\ntop_two_categories = category_counts.nlargest(2).index.tolist()\n\n# Return the top 2 categories as a list\nreturn top_two_categories\n",
+            "index": 199
+        },
+        {
+            "annotation": "# Use nlargest to find the row with the maximum snow depth (SNWD)\ndeepest_snow_date = df.nlargest(1, 'SNWD')['DATE'].iloc[0]\n\n# Return the date corresponding to the deepest snow depth\nreturn deepest_snow_date\n",
+            "index": 176
+        },
+        {
+            "annotation": "return (df['review_scores_rating'] == 5.0).any()\n",
+            "index": 268
+        },
+        {
+            "annotation": "# The 'nsmallest()' method retrieves the 6 smallest values from the 'review_scores_communication' column.\nreturn df['review_scores_communication'].nsmallest(6).tolist()\n",
+            "index": 124
+        },
+        {
+            "annotation": "# Calculate the 6 smallest scores from the 'score' column\nsix_smallest_scores = df['score'].nsmallest(6)\n\n# Return the 6 smallest scores as a list\nreturn six_smallest_scores.tolist()\n",
+            "index": 344
+        },
+        {
+            "annotation": "# Find the date corresponding to the highest TMAX value.\n# - `idxmax()` finds the index of the row where TMAX is highest.\n# - Use this index to fetch the corresponding DATE value.\nhighest_temp_date = df.loc[df['TMAX'].idxmax(), 'DATE']\n\nreturn highest_temp_date\n",
+            "index": 175
+        },
+        {
+            "annotation": "# Use boolean indexing to find the occupation of the customer with ID 200000.\noccupation = df.loc[df['CustomerID'] == 200000, 'Occupation'].iloc[0]\n\n# Return the occupation.\nreturn occupation\n",
+            "index": 313
+        },
+        {
+            "annotation": "# Use nlargest to get the top 4 most frequent rate codes and return them as a list.\nreturn df['RatecodeID'].value_counts().nlargest(4).index.tolist()\n",
+            "index": 78
+        },
+        {
+            "annotation": "# Count occurrences of each country and select the top 3 using `nlargest`\ntop_countries = df['country'].value_counts().nlargest(3)\n    \n# Return the index of the top countries as a list\nreturn top_countries.index.tolist()\n",
+            "index": 15
+        },
+        {
+            "annotation": "# Check if 'Nuts' is present in the 'SUB GROUP' column\nreturn 'Nuts' in df['SUB GROUP'].values\n",
+            "index": 286
+        },
+        {
+            "annotation": "# Get the unique complaint keys, sort them, and return the first 3 values\nreturn sorted(df['unique_key'].unique())[:3]\n",
+            "index": 102
+        },
+        {
+            "annotation": "# Return the minimum value in the 'TMIN' column\nreturn df['TMIN'].min()\n",
+            "index": 170
+        },
+        {
+            "annotation": "# Get the 3 most common groups and return their counts as a list\nreturn df['GROUP'].value_counts().nlargest(3).tolist()\n",
+            "index": 303
+        },
+        {
+            "annotation": "# Find the most frequent language used in titles.\nreturn df['title_gx_lang'].mode()[0]\n",
+            "index": 334
+        },
+        {
+            "annotation": "# Find all unique values in 'ExerciseAngina' column\nnum_unique_exercise_angina = df['ExerciseAngina'].nunique()\n\n# Check if the number of unique values is 1\nreturn num_unique_exercise_angina == 1\n",
+            "index": 225
+        },
+        {
+            "annotation": "# Check if any trip has a distance greater than 30 miles\ntrips_over_30 = df['trip_distance'].gt(30)  # Check for distance > 30 miles\n\n# Return True if any trip has a distance > 30, else False\nreturn trips_over_30.any()\n",
+            "index": 65
+        },
+        {
+            "annotation": "# Get the earliest pickup date\nfirst_trip_date = df['tpep_pickup_datetime'].min()  # Find the minimum (earliest) date\n    \n# Return the date of the first recorded trip\nreturn first_trip_date\n",
+            "index": 76
+        },
+        {
+            "annotation": "# Count the unique values in the 'agency' column\nreturn df['agency'].nunique()  # Return the number of unique agencies\n",
+            "index": 90
+        },
+        {
+            "annotation": "# Find the date with the highest precipitation\nreturn df.loc[df['PRCP'].idxmax(), 'DATE']  # Return the date corresponding to the highest precipitation\n",
+            "index": 173
+        },
+        {
+            "annotation": "# Return the top 4 dates with the highest maximum temperatures\nreturn df.nlargest(4, 'TMAX')['DATE'].tolist()  # Find top 4 max temperatures and return corresponding dates as a list\n",
+            "index": 179
+        },
+        {
+            "annotation": "# Calculate the number of occurences of each value in 'Localidad' column\nnum_values_localidad = df['Localidad'].value_counts()\n\n# Find the 2 most common localities for properties listed\ntwo_most_common_localities = num_values_localidad.nlargest(2).index\n\n# Return the result as a list\nreturn two_most_common_localities.tolist()\n\n",
+            "index": 399
+        }
+    ]
+}

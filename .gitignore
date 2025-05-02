@@ -1,2 +1,4 @@
 .env
-annotation/
+*.zip
+competition/
+results/

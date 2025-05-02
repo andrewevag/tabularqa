@@ -181,7 +181,7 @@ class Llama3_8BAnswererOllama(Answerer):
                 },
             raw=True
         )
-        return response['response'], response['prompt_eval_count'], 0
+        return response['response'], 0, 0
 
     def __str__(self) -> str:
         return f"Llama3_8BAnswererOllama(Answerer)\n\tmodel_id: {self.model_id}\n\tpit: {self.pit}\n\tpot: {self.pot}\n\ttemperature: {self.temperature}\n\ttop_p: {self.top_p}\n\tmax_gen_len: {self.max_gen_len}"
@@ -205,9 +205,9 @@ class Llama3_8BAnswererOllamaChat(Answerer):
                 "temperature": self.temperature, 
                 "top_p": self.top_p, 
                 "num_predict" : self.max_gen_len,
-                "num_ctx" : 1024 * 30
+                "num_ctx" : 1024 * 32
             })
-        return response.message.content,response.prompt_eval_count, 0
+        return response.message.content, 0, 0
 
     def __str__(self):
         return f"Llama3_8BAnswererOllamaChat(Answerer)\n\tmodel_id: {self.model_id}\n\tpit: {self.pit}\n\tpot: {self.pot}\n\ttemperature: {self.temperature}\n\ttop_p: {self.top_p}\n\tmax_gen_len: {self.max_gen_len}"
@@ -252,7 +252,6 @@ class Llama3_370BAnswererOllamaChat(Answerer):
         
 
     def __call__(self, prompt):
-        print(prompt, len(prompt))
         response: ChatResponse = ollama.chat(
             model='llama3.3',
             messages=prompt,
@@ -260,7 +259,7 @@ class Llama3_370BAnswererOllamaChat(Answerer):
                 "temperature": self.temperature, 
                 "top_p": self.top_p, 
                 "num_predict" : self.max_gen_len,
-                "num_ctx" : 1024 * 16
+                "num_ctx" : 1024 * 32
             })
         return response.message.content, 0, 0
 
@@ -290,7 +289,7 @@ class Qwen2_5_Coder7BAnswererOllama(Answerer):
                 },
             raw=True
         )
-        return response['response'], response['prompt_eval_count'], 0
+        return response['response'], 0, 0
 
     def __str__(self):
         return f"Qwen2_5_Coder7BAnswererOllama(Answerer)\n\tmodel_id: {self.model_id}\n\tpit: {self.pit}\n\tpot: {self.pot}\n\ttemperature: {self.temperature}\n\ttop_p: {self.top_p}\n\tmax_gen_len: {self.max_gen_len}"
@@ -314,10 +313,10 @@ class Qwen2_5_Coder7BAnswererOllamaChat(Answerer):
                 "temperature": self.temperature, 
                 "top_p": self.top_p, 
                 "num_predict" : self.max_gen_len,
-                "num_ctx" : 1024 * 32
+                "num_ctx" : 1024 * 64
             })
 
-        return response['message']['content'], response['prompt_eval_count'], 0
+        return response['message']['content'], 0, 0
 
     def __str__(self):
         return f"Qwen2_5_Coder7BAnswererOllamaChat(Answerer)\n\tmodel_id: {self.model_id}\n\tpit: {self.pit}\n\tpot: {self.pot}\n\ttemperature: {self.temperature}\n\ttop_p: {self.top_p}\n\tmax_gen_len: {self.max_gen_len}"

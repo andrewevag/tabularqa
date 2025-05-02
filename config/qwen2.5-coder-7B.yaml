@@ -1,0 +1,73 @@
+complete_pipe:
+  class_name: pipelines.ErrorFixingAndTimeoutPipeline
+  arguments:
+    main_pipeline:
+      class_name: pipelines.Pipeline
+      arguments:
+        prompt_generator:
+          class_name: prompt_generators.FewShotChainOfThoughtBuilderWithTypesRowsAndPredictingResultingTypesVol2
+          arguments:
+            loader: !LOADER_PLACEHOLDER
+            prompt_generator:
+              class_name: prompt_generators.ZeroShotDetailedTypesRowsExValuesNullsOneLineRowsVol2
+              arguments:
+                loader: !LOADER_PLACEHOLDER
+            exemplar_builder:
+              class_name: prompt_generators.ExemplarBuilder
+              arguments:
+                loader: !LOADER_PLACEHOLDER
+                prompt_generator:
+                  class_name: prompt_generators.ZeroShotDetailedTypesRowsExValuesNullsOneLineRowsVol2
+                  arguments:
+                    loader: !LOADER_PLACEHOLDER
+            shots: !EXEMPLARS_PLACEHOLDER
+          
+        answerer:
+          class_name: model_calls.Qwen2_5_Coder7BAnswererOllama
+          arguments:
+            temperature: 0.0
+            top_p: 0.9
+            max_gen_len: 300
+        postprocessor:
+          class_name: postprocessors.TillReturnLinePostProcessorMultipleIndents
+          arguments:
+            loader: !LOADER_PLACEHOLDER
+            prefix: 4
+            first_prefix: "    # The columns used to answer the question: "
+        executor:
+          class_name: executors.SaferMultiLineStatementExecutor
+          arguments:
+            loader: !LOADER_PLACEHOLDER
+        debug: !DEBUG_PLACEHOLDER
+    
+    
+    error_fix_pipeline:
+      class_name: pipelines.ErrorFixPipeline
+      arguments:
+        prompt_generator:
+          class_name: prompt_generators.ErrorFixingGeneratorOLlama
+          arguments:
+            loader: !LOADER_PLACEHOLDER
+            zero_shot_generator:
+              class_name: prompt_generators.ZeroShotDetailedTypesRowsExValuesNullsOneLineRowsUniquesStrExamples
+              arguments:
+                loader: !LOADER_PLACEHOLDER
+            num_rows: 10
+        answerer:
+          class_name: model_calls.Qwen2_5_Coder7BAnswererOllamaChat
+          arguments:
+            temperature: 1.0
+            top_p: 0.9
+            max_gen_len: 1000
+        postprocessor:
+          class_name: postprocessors.TillReturnLinePostProcessorMultipleIndents
+          arguments:
+            loader: !LOADER_PLACEHOLDER
+            prefix: 4
+            first_prefix: "    # The columns used to answer the question: "
+        executor:
+          class_name: executors.SaferMultiLineStatementExecutor
+          arguments:
+            loader: !LOADER_PLACEHOLDER
+    max_timeout: 600
+    num_attempts: 2
